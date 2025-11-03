@@ -171,7 +171,7 @@ export const projects = [
     image: "/assets/project/salespoint.png",
     tags: ["React", "React Native", "Django", "Firebase", "Celery"],
     github: null,
-    demo: "https://app.salespoint.com",
+    demo: "https://app.salespoint.com.mm",
     gradient: "from-emerald-500 to-teal-500",
     featured: false,
   },
