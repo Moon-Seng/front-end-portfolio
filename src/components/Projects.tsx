@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ExternalLink, Github } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { LazyImage } from "./LazyImage";
 import { projects } from "../portfolio-config";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -106,9 +106,14 @@ export function Projects() {
                     </h4>
                     <div className="grid grid-cols-1 gap-2 sm:gap-3">
                       {project.features?.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2 sm:gap-3">
+                        <div
+                          key={idx}
+                          className="flex items-center gap-2 sm:gap-3"
+                        >
                           <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex-shrink-0"></div>
-                          <span className="text-zinc-300 text-sm sm:text-base">{feature}</span>
+                          <span className="text-zinc-300 text-sm sm:text-base">
+                            {feature}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -126,36 +131,40 @@ export function Projects() {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm sm:text-base"
-                    >
-                      <Github size={18} className="sm:w-5 sm:h-5" />
-                      <span>View Code</span>
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 text-sm sm:text-base"
-                    >
-                      <ExternalLink size={18} className="sm:w-5 sm:h-5" />
-                      <span>Live Demo</span>
-                    </a>
+                    {project.github !== null && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm sm:text-base"
+                      >
+                        <Github size={18} className="sm:w-5 sm:h-5" />
+                        <span>View Code</span>
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 text-sm sm:text-base"
+                      >
+                        <ExternalLink size={18} className="sm:w-5 sm:h-5" />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
                   </div>
                 </div>
 
                 <div className="order-1 lg:order-2 relative">
                   <div className="relative rounded-xl sm:rounded-2xl overflow-hidden group">
-                    <ImageWithFallback
+                    <LazyImage
                       src={project.image}
                       alt={project.title}
                       className="w-full h-48 sm:h-64 lg:h-80 xl:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700"
                     />
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
+                      className={`absolute inset-0 bg-gradient-to-br  opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
                     ></div>
                   </div>
                 </div>
@@ -173,13 +182,13 @@ export function Projects() {
                 className="project-card group relative bg-gradient-to-br from-zinc-900/80 to-zinc-800/40 rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500 backdrop-blur-sm"
               >
                 <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                  <ImageWithFallback
+                  <LazyImage
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-br  opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
                   ></div>
                 </div>
 
@@ -227,24 +236,33 @@ export function Projects() {
                   </div>
 
                   <div className="flex gap-4 pt-2">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-cyan-400 transition-colors duration-300"
-                    >
-                      <Github size={16} className="sm:w-4 sm:h-4" />
-                      <span className="text-xs sm:text-sm font-medium">Code</span>
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-purple-400 transition-colors duration-300"
-                    >
-                      <ExternalLink size={16} className="sm:w-4 sm:h-4" />
-                      <span className="text-xs sm:text-sm font-medium">Demo</span>
-                    </a>
+                    {project.github !== null && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-cyan-400 transition-colors duration-300"
+                      >
+                        <Github size={16} className="sm:w-4 sm:h-4" />
+                        <span className="text-xs sm:text-sm font-medium">
+                          Code
+                        </span>
+                      </a>
+                    )}
+
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-purple-400 transition-colors duration-300"
+                      >
+                        <ExternalLink size={16} className="sm:w-4 sm:h-4" />
+                        <span className="text-xs sm:text-sm font-medium">
+                          Demo
+                        </span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

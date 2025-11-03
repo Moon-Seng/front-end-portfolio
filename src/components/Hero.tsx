@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { hero, socialLinks } from "../portfolio-config";
+import { useAnalytics } from "../components/Analytics";
 
 gsap.registerPlugin(useGSAP);
 
@@ -11,6 +12,7 @@ export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const { trackClick } = useAnalytics();
 
   useGSAP(
     () => {
@@ -74,13 +76,17 @@ export function Hero() {
         >
           <a
             href={hero.primaryCTA.href}
+            onClick={() => trackClick("primary_cta", "hero")}
             className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 text-lg font-semibold"
           >
-            <span className="relative z-10 text-white">{hero.primaryCTA.text}</span>
+            <span className="relative z-10 text-white">
+              {hero.primaryCTA.text}
+            </span>
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
           <a
             href={hero.secondaryCTA.href}
+            onClick={() => trackClick("secondary_cta", "hero")}
             className="w-full sm:w-auto px-8 py-4 border-2 border-zinc-700 rounded-xl text-zinc-300 hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/5 transition-all duration-300 text-lg font-semibold"
           >
             {hero.secondaryCTA.text}
@@ -118,8 +124,8 @@ export function Hero() {
           <span className="text-sm sm:text-base font-medium">
             Scroll to explore
           </span>
-          <div className="p-2 border border-zinc-700 rounded-full hover:border-cyan-400 transition-colors duration-300">
-            <ArrowDown size={18} className="sm:w-5 sm:h-5" />
+          <div className="p-2 border border-zinc-700 rounded-full hover:border-cyan-400 hover:text-cyan-400 transition-colors duration-300">
+            <ArrowDown size={18} className="sm:w-5 sm:h-5 " />
           </div>
         </div>
       </div>

@@ -1,0 +1,25 @@
+{
+  "name": "Frontend Developer Portfolio",
+  "short_name": "Portfolio",
+  "description": "Senior Frontend Developer Portfolio showcasing React, TypeScript, and modern web technologies",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#22d3ee",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/fav/moon-vector-png-3.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/fav/moon-vector-png-3.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["portfolio", "developer", "business"]
+}

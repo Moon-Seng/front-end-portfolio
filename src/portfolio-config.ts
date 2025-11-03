@@ -1,6 +1,6 @@
 /**
  * Portfolio Configuration File
- * 
+ *
  * Edit this file to customize all content, colors, and settings for your portfolio.
  * This makes it easy to update your portfolio without diving into component code.
  */
@@ -8,6 +8,8 @@
 // ============================================
 // PERSONAL INFORMATION
 // ============================================
+
+import { Code2, Server, Smartphone, Wrench } from "lucide-react";
 
 export const personalInfo = {
   name: "Frontend Developer",
@@ -27,9 +29,9 @@ export const personalInfo = {
 // ============================================
 
 export const socialLinks = {
-  github: "https://github.com",
-  linkedin: "https://linkedin.com",
-  email: "mailto:hello@example.com",
+  github: "https://github.com/Moon-Seng",
+  linkedin: "https://www.linkedin.com/in/moon-seng/",
+  email: "mailto:moonseng.dev@gmail.com",
 };
 
 // ============================================
@@ -39,7 +41,8 @@ export const socialLinks = {
 export const hero = {
   greeting: "Hi, I'm",
   title: "Frontend Developer",
-  description: "Crafting beautiful, interactive web and mobile experiences with React, React Native, and Tailwind CSS. Specialized in creating smooth animations with GSAP.",
+  description:
+    "Crafting beautiful, interactive web and mobile experiences with React, React Native, and Tailwind CSS. Specialized in creating smooth animations with GSAP.",
   primaryCTA: {
     text: "View My Work",
     href: "#projects",
@@ -56,28 +59,52 @@ export const hero = {
 
 export const skills = [
   {
-    icon: "Code2",
-    title: "Web Development",
-    description: "Building responsive and performant web applications with React and modern JavaScript.",
-    gradient: "from-cyan-500 to-blue-500",
+    icon: Code2,
+    title: "Frontend",
+    technologies: [
+      "React.js",
+      "JavaScript/TypeScript",
+      "GSAP",
+      "Tailwind CSS",
+      "Responsive Design",
+    ],
+    color: "from-cyan-500 to-blue-500",
   },
   {
-    icon: "Smartphone",
-    title: "Mobile Development",
-    description: "Creating native-like mobile experiences with React Native for iOS and Android.",
-    gradient: "from-blue-500 to-purple-500",
+    icon: Server,
+    title: "Backend",
+    technologies: [
+      "Django",
+      "PostgreSQL",
+      "Firebase",
+      "REST APIs",
+      "Authentication",
+    ],
+    color: "from-blue-500 to-purple-500",
   },
   {
-    icon: "Palette",
-    title: "UI/UX Design",
-    description: "Crafting beautiful interfaces with Tailwind CSS and attention to user experience.",
-    gradient: "from-purple-500 to-pink-500",
+    icon: Smartphone,
+    title: "Mobile",
+    technologies: [
+      "React Native",
+      "Android/iOS",
+      "Expo",
+      "UI/UX Design",
+      "Cross-platform",
+    ],
+    color: "from-purple-500 to-pink-500",
   },
   {
-    icon: "Zap",
-    title: "Animations",
-    description: "Bringing designs to life with smooth, engaging animations using GSAP.",
-    gradient: "from-pink-500 to-cyan-500",
+    icon: Wrench,
+    title: "Tools & More",
+    technologies: [
+      "Git/GitHub",
+      "Docker",
+      "CI/CD",
+      "Agile/Scrum",
+      "Technical Writing",
+    ],
+    color: "from-pink-500 to-cyan-500",
   },
 ];
 
@@ -85,38 +112,55 @@ export const skills = [
 // TECH STACK
 // ============================================
 
-export const techStack = [
-  "React",
-  "React Native",
-  "TypeScript",
-  "JavaScript",
-  "Tailwind CSS",
-  "GSAP",
-  "Next.js",
-  "Vue.js",
-  "Socket.io",
-  "MongoDB",
-  "Firebase",
-  "Expo",
-  "D3.js",
-  "Chart.js",
-  "WebSocket",
-  "Stripe API",
-  "CoinGecko API",
-  "ML Kit",
-  "Vuex",
-  "Redux",
-];
-
 // ============================================
 // PROJECTS
 // ============================================
 
 export const projects = [
   {
-    title: "E-Commerce Platform",
+    title: "Spylt",
+    subtitle: "Advanced Modern Aniamtion Website",
+    description:
+      "An award-winning interactive website built with modern web technologies, featuring stunning GSAP animations, smooth scrolling effects, and responsive design. This project demonstrates advanced animation techniques and UI interactions suitable for Awwwards recognition.",
+    features: [
+      "Advanced GSAP animations and timelines",
+      "Video backgrounds and interactive elements",
+      "Fully responsive design",
+      "ScrollTrigger animations",
+      "Custom clip-path effects",
+      "Interactive flavor slider",
+    ],
+    image: "../assets/project/spylt.mp4",
+    tags: ["React", "TypeScript", "Tailwind CSS", "GSAP"],
+    github: "https://github.com/Moon-Seng/Spylt",
+    demo: "https://spylt-animation.netlify.app/",
+    gradient: "from-cyan-500 to-blue-500",
+    featured: true,
+  },
+  {
+    title: "Velvet Pour",
+    subtitle: "An Animated Bar Website",
+    description:
+      "Build a stunning GSAP-powered cocktail website using React and Tailwind CSS—a modern, scroll-driven experience packed with advanced animations.",
+    features: [
+      "SplitText Animations",
+      "ScrollTrigger Effects",
+      "Parallax Scrolling",
+      "Image Masking Effects",
+      "Responsive Design",
+    ],
+    image: "../assets/project/velvet-pour.png",
+    tags: ["React", "TypeScript", "Tailwind CSS", "GSAP"],
+    github: "https://github.com/Moon-Seng/gsap-cocktails",
+    demo: "https://gsap-cocktails-moon.netlify.app/",
+    gradient: "from-purple-500 to-pink-500",
+    featured: false,
+  },
+  {
+    title: "Salespoint",
     subtitle: "Full-Stack Shopping Experience",
-    description: "A comprehensive e-commerce platform featuring advanced product filtering, real-time inventory management, secure payment integration, and personalized user experiences. Implemented with modern React patterns and optimized for performance.",
+    description:
+      "A comprehensive e-commerce platform featuring advanced product filtering, real-time inventory management, secure payment integration, and personalized user experiences. Implemented with modern React patterns and optimized for performance.",
     features: [
       "Advanced Search & Filtering",
       "Real-time Cart Updates",
@@ -124,82 +168,48 @@ export const projects = [
       "Admin Dashboard",
       "Mobile-First Design",
     ],
-    image: "https://images.unsplash.com/photo-1593720213681-e9a8778330a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGV8ZW58MXx8fHwxNzYwMTU0MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "TypeScript", "Tailwind CSS", "GSAP", "Stripe API"],
-    github: "https://github.com",
-    demo: "https://example.com",
-    gradient: "from-cyan-500 to-blue-500",
-    featured: true,
-  },
-  {
-    title: "FitTrack Pro",
-    subtitle: "Cross-Platform Fitness App",
-    description: "A comprehensive fitness tracking application with AI-powered workout recommendations, social challenges, and detailed analytics. Built with React Native for seamless cross-platform performance.",
-    features: [
-      "AI Workout Plans",
-      "Progress Analytics",
-      "Social Challenges",
-      "Offline Mode",
-      "Wearable Integration",
-    ],
-    image: "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXNpZ258ZW58MXx8fHwxNzYwMTcwMzM5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React Native", "TypeScript", "Expo", "Firebase", "ML Kit"],
-    github: "https://github.com",
-    demo: "https://example.com",
-    gradient: "from-purple-500 to-pink-500",
-    featured: false,
-  },
-  {
-    title: "Analytics Dashboard",
-    subtitle: "Real-Time Data Visualization",
-    description: "An interactive analytics dashboard providing real-time insights with beautiful data visualizations, customizable widgets, and advanced filtering capabilities. Optimized for performance with large datasets.",
-    features: [
-      "Real-time Updates",
-      "Custom Widgets",
-      "Data Export",
-      "Advanced Filters",
-      "Multi-tenant Support",
-    ],
-    image: "https://images.unsplash.com/photo-1630283017802-785b7aff9aac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3b3Jrc3BhY2UlMjBkZXNrfGVufDF8fHx8MTc2MDE2NTI2OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "D3.js", "GSAP", "WebSocket", "Chart.js"],
-    github: "https://github.com",
-    demo: "https://example.com",
+    image: "../assets/project/salespoint.png",
+    tags: ["React", "React Native", "Django", "Firebase", "Celery"],
+    github: null,
+    demo: "https://app.salespoint.com",
     gradient: "from-emerald-500 to-teal-500",
     featured: false,
   },
   {
-    title: "TaskFlow Manager",
-    subtitle: "Team Collaboration Platform",
-    description: "A comprehensive project management tool with real-time collaboration, task tracking, and team communication features. Built for modern teams with intuitive design.",
+    title: "PEP Myanmar",
+    subtitle: "E-commerce Platform for Diary Product",
+    description:
+      "A comprehensive  e-commerce platform featuring advanced product filtering, ordering system , payment system , notification system and personalized user experience.",
     features: [
       "Real-time Collaboration",
-      "Task Management",
-      "Team Chat",
-      "File Sharing",
-      "Progress Tracking",
+      "Advanced Search & Filtering",
+      "Real-time Cart Updates",
+      "Secure Payment Gateway",
+      "Mobile-First Design",
     ],
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwY29sbGFib3JhdGlvbnxlbnwxfHx8fDE3NjAxNzAzMzl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Next.js", "Socket.io", "MongoDB", "Tailwind CSS"],
-    github: "https://github.com",
-    demo: "https://example.com",
+    image: "../assets/project/pep.png",
+    tags: ["React", "Tailwind CSS", "MUI", "Axios"],
+    github: null,
+    demo: "https://www.pepmyanmardairy.com/",
     gradient: "from-orange-500 to-red-500",
     featured: false,
   },
   {
-    title: "CryptoTracker Pro",
-    subtitle: "Cryptocurrency Portfolio",
-    description: "Advanced cryptocurrency tracking application with portfolio management, price alerts, and market analysis. Features real-time data and beautiful charts.",
+    title: "Project FairyTales",
+    subtitle: "Cross-Platform E-commerce Application",
+    description:
+      "A comprehensive  e-commerce platform featuring advanced product category filtering, loyalty, wallet, coupon, notification system and personalized user experience.",
     features: [
-      "Portfolio Tracking",
-      "Price Alerts",
-      "Market Analysis",
-      "News Feed",
-      "Trading Signals",
+      "Advance Three Product Category Filtering",
+      "Loyalty System",
+      "Wallet System",
+      "Coupon Management",
+      "Cross Platfrom Application",
     ],
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcnlwdG9jdXJyZW5jeXxlbnwxfHx8fDE3NjAxNzAzMzl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Vue.js", "Vuex", "CoinGecko API", "Chart.js"],
-    github: "https://github.com",
-    demo: "https://example.com",
+    image: "../assets/project/fairytales.png",
+    tags: ["Expo", "Tailwind CSS", "React Native Paper", "EAS"],
+    github: null,
+    demo: null,
     gradient: "from-yellow-500 to-orange-500",
     featured: false,
   },
@@ -213,38 +223,82 @@ export const experience = [
   {
     type: "work",
     title: "Senior Frontend Developer",
-    company: "Tech Company",
-    period: "2023 - Present",
-    description: "Leading frontend development for web and mobile applications. Implementing GSAP animations and mentoring junior developers.",
+    company: "Axiom Myanmar",
+    period: "2024 - Present",
+    description:
+      "Leading frontend development for web and mobile applications. Implementing GSAP animations and mentoring junior developers.",
     achievements: [
-      "Improved app performance by 40%",
-      "Led migration to React Native",
+      "Improved app performance by writing Unit Testing",
+      "Led migration from React Native to Expo",
       "Implemented design system",
     ],
   },
   {
     type: "work",
     title: "Full Stack Developer",
-    company: "Digital Agency",
-    period: "2021 - 2023",
-    description: "Developed full-stack applications while discovering passion for frontend development and animations.",
+    company: "360 Digital",
+    period: "2023 - 2024",
+    description:
+      "Developed full-stack applications while discovering passion for frontend development and animations.",
     achievements: [
-      "Built 15+ client projects",
-      "Specialized in React & React Native",
-      "Introduced GSAP to the team",
+      "Built Full Stack Web Applications and Cross Platform Mobile Application",
+      "Specialized in React, React Native, Django",
+      "Using Celery to DJango Backend",
+    ],
+  },
+  {
+    type: "work",
+    title: "Front-end Developer",
+    company: "360 Digital",
+    period: "2022 - 2023",
+    description:
+      "Developed font-end applications for various E-commerce Projects",
+    achievements: [
+      "Built 15+ project features",
+      "Specialized in React , Tailwind and MUI ",
+      "Introduced Typescript to the team",
     ],
   },
   {
     type: "education",
-    title: "Computer Science Degree",
-    company: "University",
-    period: "2017 - 2021",
-    description: "Focused on web technologies, mobile development, and user interface design.",
+    title: "Professional Diploma in Computing and Information Technology",
+    company: "RMIT",
+    period: "2022 - 2023",
+    description:
+      "Focused on communication technologies, business information technology, and computing.",
     achievements: [
       "Graduated with honors",
-      "Thesis on web animations",
-      "Built multiple projects",
+      "Thesis on web development",
+      "completed multiple exam",
     ],
+  },
+];
+
+// ============================================
+// Testimonial
+// ============================================
+
+export const testimonials = [
+  {
+    name: "Aung Ye Naung",
+    role: "Product Manager",
+    company: "Axiom",
+    content:
+      "Working with this developer was a smooth and professional experience. Every part of the frontend was carefully crafted with a clear understanding of design and user flow. The attention to detail and responsiveness really elevated the entire project.",
+  },
+  {
+    name: "Myat Thuyein Tun",
+    role: "Project Manager",
+    company: "360 Digital",
+    content:
+      "An extremely talented frontend developer who consistently delivers beyond expectations. The communication was excellent, and every milestone was met on time with clean, scalable code and beautiful UI results.",
+  },
+  {
+    name: "Ye Htet",
+    role: "Senior UI/UX Designer",
+    company: "360 Digital",
+    content:
+      "It’s rare to find a developer who understands both design and implementation so well. The collaboration process was seamless, and the final product perfectly matched the design vision with great performance and usability.",
   },
 ];
 
@@ -254,7 +308,8 @@ export const experience = [
 
 export const contact = {
   title: "Let's Work Together",
-  description: "Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing.",
+  description:
+    "Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing.",
   email: {
     address: "hello@example.com",
     label: "Email",
@@ -308,7 +363,8 @@ export const navigation = {
 export const footer = {
   brand: {
     logo: "dev.",
-    tagline: "Frontend developer crafting beautiful web and mobile experiences with passion for animations.",
+    tagline:
+      "Frontend developer crafting beautiful web and mobile experiences with passion for animations.",
   },
   copyright: "© 2025 All rights reserved.",
   madewith: "Made with ❤️ using React, Tailwind & GSAP",
@@ -320,7 +376,9 @@ export const footer = {
 
 export const seo = {
   title: "Frontend Developer Portfolio",
-  description: "Portfolio showcasing frontend development work with React, React Native, and GSAP animations",
-  keywords: "frontend developer, react, react native, tailwind, gsap, web development, mobile development",
+  description:
+    "Portfolio showcasing frontend development work with React, React Native, and GSAP animations",
+  keywords:
+    "frontend developer, react, react native, tailwind, gsap, web development, mobile development",
   author: "Frontend Developer",
 };

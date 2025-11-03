@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Briefcase, GraduationCap } from "lucide-react";
+import { experience } from "@/portfolio-config";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -84,48 +85,6 @@ export function Experience() {
     { scope: sectionRef }
   );
 
-  const experiences = [
-    {
-      type: "work",
-      title: "Senior Frontend Developer",
-      company: "Tech Company",
-      period: "2023 - Present",
-      description:
-        "Leading frontend development for web and mobile applications. Implementing GSAP animations and mentoring junior developers.",
-      achievements: [
-        "Improved app performance by 40%",
-        "Led migration to React Native",
-        "Implemented design system",
-      ],
-    },
-    {
-      type: "work",
-      title: "Full Stack Developer",
-      company: "Digital Agency",
-      period: "2021 - 2023",
-      description:
-        "Developed full-stack applications while discovering passion for frontend development and animations.",
-      achievements: [
-        "Built 15+ client projects",
-        "Specialized in React & React Native",
-        "Introduced GSAP to the team",
-      ],
-    },
-    {
-      type: "education",
-      title: "Computer Science Degree",
-      company: "University",
-      period: "2017 - 2021",
-      description:
-        "Focused on web technologies, mobile development, and user interface design.",
-      achievements: [
-        "Graduated with honors",
-        "Thesis on web animations",
-        "Built multiple projects",
-      ],
-    },
-  ];
-
   return (
     <section
       id="experience"
@@ -135,7 +94,7 @@ export function Experience() {
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         {/* Section Title */}
         <div ref={titleRef} className="text-center mb-16">
-          <h2 className="mb-4">
+          <h2 className="text-4xl font-bold  mb-4">
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Experience & Education
             </span>
@@ -148,7 +107,7 @@ export function Experience() {
 
         {/* Experience Grid */}
         <div className="space-y-8">
-          {experiences.map((exp, index) => (
+          {experience.map((exp, index) => (
             <div key={index} className="timeline-item relative group">
               {/* Gradient Accent Bar */}
               <div className="accent-bar absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>

@@ -1,4 +1,6 @@
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { socialLinks } from "@/portfolio-config";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import moment from "moment";
 
 export function Footer() {
   return (
@@ -8,13 +10,18 @@ export function Footer() {
           {/* Brand */}
           <div>
             <a href="#home" className="inline-block mb-4">
-              <span className="text-xl tracking-tight">
-                <span className="text-white">dev</span>
-                <span className="text-cyan-400">.</span>
+              <span className="text-xl flex items-center justify-start tracking-tight">
+                <img
+                  className="w-[32px] mr-2"
+                  src="../assets/fav/moon-vector-png-3.png"
+                  alt=""
+                />
+                <span className="text-white">Moon Seng</span>
               </span>
             </a>
             <p className="text-zinc-400 text-sm">
-              Frontend developer crafting beautiful web and mobile experiences with passion for animations.
+              Frontend developer crafting beautiful web and mobile experiences
+              with passion for animations.
             </p>
           </div>
 
@@ -22,16 +29,18 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {['Home', 'About', 'Projects', 'Experience', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-zinc-400 hover:text-cyan-400 transition-colors text-sm"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {["Home", "About", "Projects", "Experience", "Contact"].map(
+                (item) => (
+                  <li key={item}>
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="text-zinc-400 hover:text-cyan-400 transition-colors text-sm"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
@@ -40,7 +49,7 @@ export function Footer() {
             <h4 className="text-white mb-4">Connect</h4>
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com"
+                href={socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-zinc-900 rounded-lg text-zinc-400 hover:text-cyan-400 hover:bg-zinc-800 transition-all"
@@ -48,7 +57,7 @@ export function Footer() {
                 <Github size={20} />
               </a>
               <a
-                href="https://linkedin.com"
+                href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-zinc-900 rounded-lg text-zinc-400 hover:text-cyan-400 hover:bg-zinc-800 transition-all"
@@ -56,7 +65,7 @@ export function Footer() {
                 <Linkedin size={20} />
               </a>
               <a
-                href="mailto:hello@example.com"
+                href={socialLinks.email}
                 className="p-2 bg-zinc-900 rounded-lg text-zinc-400 hover:text-cyan-400 hover:bg-zinc-800 transition-all"
               >
                 <Mail size={20} />
@@ -69,10 +78,12 @@ export function Footer() {
         <div className="pt-8 border-t border-zinc-800">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-zinc-400 text-sm">
-              © 2025 All rights reserved.
+              © {moment().format("YYYY")} All rights reserved.
             </p>
             <p className="text-zinc-400 text-sm flex items-center gap-2">
-              Made with <Heart size={16} className="text-cyan-400 fill-cyan-400" /> using React, Tailwind & GSAP
+              Made with{" "}
+              <Heart size={16} className="text-cyan-400 fill-cyan-400" /> using
+              Nextjs, Tailwind & GSAP
             </p>
           </div>
         </div>

@@ -1,11 +1,17 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ToastProvider } from "./contexts/ToastContext";
+import { AnalyticsProvider } from "./components/Analytics";
+import { SEO } from "./components/SEO";
+import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 import { Navigation } from "./components/Navigation";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Projects } from "./components/Projects";
 import { Experience } from "./components/Experience";
+import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
@@ -69,15 +75,42 @@ export default function App() {
     };
   }, []);
 
+  // Register service worker
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((registration) => {
+          console.log("SW registered: ", registration);
+        })
+        .catch((registrationError) => {
+          console.log("SW registration failed: ", registrationError);
+        });
+    }
+  }, []);
+
   return (
-    <div className="relative bg-zinc-950 text-white overflow-x-hidden">
-      <Navigation />
-      <Hero />
-      <About />
-      <Projects />
-      <Experience />
-      <Contact />
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <ToastProvider>
+        <AnalyticsProvider>
+          <SEO
+            title="Moon Seng | Frontend Developer Portfolio - React & TypeScript Expert"
+            description="Senior Frontend Developer specializing in React, TypeScript, GSAP animations, and modern web technologies. Available for freelance projects."
+            image="/og-portfolio.jpg"
+          />
+          <div className="relative min-h-screen bg-zinc-950 text-white overflow-x-hidden transition-colors duration-300">
+            <Navigation />
+            <Hero />
+            <About />
+            <Projects />
+            <Experience />
+            <Testimonials />
+            <Contact />
+            <Footer />
+            <PWAInstallPrompt />
+          </div>
+        </AnalyticsProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   );
 }
