@@ -30,7 +30,6 @@ export function Contact() {
 
   useGSAP(
     () => {
-      // Title animation
       gsap.fromTo(
         titleRef.current,
         { opacity: 0, y: 50 },
@@ -47,7 +46,6 @@ export function Contact() {
         }
       );
 
-      // Form animation
       gsap.fromTo(
         ".contact-form",
         { opacity: 0, x: -50 },
@@ -64,7 +62,6 @@ export function Contact() {
         }
       );
 
-      // Contact info animation
       gsap.fromTo(
         ".contact-info",
         { opacity: 0, x: 50 },
@@ -109,14 +106,14 @@ export function Contact() {
 
     try {
       await emailjs.send(
-        "service_9behbt3", // replace with your Service ID
-        "template_y8hbvog", // replace with your Template ID
+        "service_9behbt3",
+        "template_y8hbvog",
         {
           from_name: formState.name,
           from_email: formState.email,
           message: formState.message,
         },
-        "6tkYn90Zu-NJxnm3x" // replace with your Public Key
+        "6tkYn90Zu-NJxnm3x"
       );
 
       trackEvent({
@@ -155,7 +152,6 @@ export function Contact() {
       className="relative py-24 lg:py-32 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Section Title */}
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
@@ -163,13 +159,13 @@ export function Contact() {
             </span>
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Have an idea for a website or web app? I’d love to collaborate and
-            bring your vision to life with clean code and elegant design.
+            Need a partner to ship a full stack product? I can design the
+            architecture, build the UI, ship the APIs, and get everything
+            deployed with confidence.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -233,7 +229,6 @@ export function Contact() {
             </Button>
           </form>
 
-          {/* Contact Information */}
           <div className="contact-info space-y-8">
             <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800">
               <h3 className="text-white mb-6">Contact Information</h3>
@@ -269,8 +264,8 @@ export function Contact() {
             <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800">
               <h3 className="text-white mb-4">Availability</h3>
               <p className="text-zinc-400 mb-4">
-                I'm currently available for freelance projects and full-time
-                opportunities.
+                I'm available for full-time roles and select freelance or
+                consulting engagements.
               </p>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-green-400/40 shadow-sm"></div>
@@ -280,7 +275,7 @@ export function Contact() {
 
             <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl p-8 border border-cyan-500/20">
               <p className="text-zinc-300 mb-4">
-                "Ready to turn your ideas into beautiful, interactive
+                "Ready to turn product ideas into reliable APIs and polished
                 experiences"
               </p>
               <p className="text-cyan-400">

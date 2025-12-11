@@ -1,4 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
+import {
+  personalInfo,
+  seo as seoConfig,
+  socialLinks,
+} from "../portfolio-config";
 
 interface SEOProps {
   title?: string;
@@ -9,11 +14,11 @@ interface SEOProps {
 }
 
 export function SEO({
-  title = 'Frontend Developer Portfolio',
-  description = 'Senior Frontend Developer specializing in React, TypeScript, and modern web technologies',
-  image = '/og-image.jpg',
-  url = window.location.href,
-  type = 'website'
+  title = seoConfig.title,
+  description = seoConfig.description,
+  image = "/og-image.jpg",
+  url = typeof window !== "undefined" ? window.location.href : "",
+  type = "website",
 }: SEOProps) {
   useEffect(() => {
     // Update document title
@@ -41,40 +46,39 @@ export function SEO({
     };
 
     // Basic meta tags
-    updateMeta('description', description);
-    updateMeta('keywords', 'frontend developer, react, typescript, web development, portfolio');
+    updateMeta("description", description);
+    updateMeta("keywords", seoConfig.keywords);
 
     // Open Graph tags
-    updateProperty('og:title', title);
-    updateProperty('og:description', description);
-    updateProperty('og:image', image);
-    updateProperty('og:url', url);
-    updateProperty('og:type', type);
+    updateProperty("og:title", title);
+    updateProperty("og:description", description);
+    updateProperty("og:image", image);
+    updateProperty("og:url", url);
+    updateProperty("og:type", type);
 
     // Twitter Card tags
-    updateMeta('twitter:card', 'summary_large_image');
-    updateMeta('twitter:title', title);
-    updateMeta('twitter:description', description);
-    updateMeta('twitter:image', image);
+    updateMeta("twitter:card", "summary_large_image");
+    updateMeta("twitter:title", title);
+    updateMeta("twitter:description", description);
+    updateMeta("twitter:image", image);
 
     // Structured data
     const structuredData = {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Frontend Developer',
-      jobTitle: 'Senior Frontend Developer',
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: personalInfo.name,
+      jobTitle: personalInfo.title,
       url: url,
-      sameAs: [
-        'https://github.com/yourusername',
-        'https://linkedin.com/in/yourusername'
-      ]
+      sameAs: [socialLinks.github, socialLinks.linkedin, socialLinks.email],
     };
 
-    let script = document.querySelector('#structured-data') as HTMLScriptElement;
+    let script = document.querySelector(
+      "#structured-data"
+    ) as HTMLScriptElement;
     if (!script) {
-      script = document.createElement('script');
-      script.id = 'structured-data';
-      script.type = 'application/ld+json';
+      script = document.createElement("script");
+      script.id = "structured-data";
+      script.type = "application/ld+json";
       document.head.appendChild(script);
     }
     script.textContent = JSON.stringify(structuredData);

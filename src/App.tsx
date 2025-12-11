@@ -94,8 +94,8 @@ export default function App() {
       <ToastProvider>
         <AnalyticsProvider>
           <SEO
-            title="Moon Seng | Frontend Developer Portfolio - React & TypeScript Expert"
-            description="Senior Frontend Developer specializing in React, TypeScript, GSAP animations, and modern web technologies. Available for freelance projects."
+            title="Moon Seng | Full Stack Developer Portfolio"
+            description="Full stack developer specializing in React/Next.js, Django, PostgreSQL, and GSAP-powered interfaces. I ship resilient APIs, polished UIs, and cloud-native deployments."
             image="/og-portfolio.jpg"
           />
           <div className="relative min-h-screen bg-zinc-950 text-white overflow-x-hidden transition-colors duration-300">

@@ -7,7 +7,6 @@ export function Footer() {
     <footer className="relative bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand */}
           <div>
             <a href="#home" className="inline-block mb-4">
               <span className="text-xl flex items-center justify-start tracking-tight">
@@ -20,12 +19,11 @@ export function Footer() {
               </span>
             </a>
             <p className="text-zinc-400 text-sm">
-              Frontend developer crafting beautiful web and mobile experiences
-              with passion for animations.
+              Full stack developer crafting resilient APIs and delightful
+              interfaces for web and mobile.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -44,7 +42,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Social */}
           <div>
             <h4 className="text-white mb-4">Connect</h4>
             <div className="flex items-center gap-4">
@@ -74,16 +71,15 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="pt-8 border-t border-zinc-800">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-zinc-400 text-sm">
-              © {moment().format("YYYY")} All rights reserved.
+              (c) {moment().format("YYYY")} All rights reserved.
             </p>
             <p className="text-zinc-400 text-sm flex items-center gap-2">
               Made with{" "}
               <Heart size={16} className="text-cyan-400 fill-cyan-400" /> using
-              Nextjs, Tailwind & GSAP
+              React, Vite, Tailwind & GSAP
             </p>
           </div>
         </div>
