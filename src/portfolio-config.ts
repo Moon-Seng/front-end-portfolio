@@ -40,17 +40,78 @@ export const socialLinks = {
 // ============================================
 
 export const hero = {
-  greeting: "Hi, I'm Moon",
-  title: "Full Stack Developer",
+  greeting: "Hi, I'm Moon Seng",
+  title: "Frontend-Focused Full‑Stack Developer",
   description:
-    "I design, build, and ship products across the stack - React/Next.js frontends, Django REST APIs, Postgres databases, and cloud-native delivery with CI/CD.",
+    "I build fast, polished React/Next.js UIs and integrate production-ready Django REST APIs. 3+ years shipping end-to-end features with strong UX, performance, and authentication (OAuth/JWT).",
+  availabilityLine: "Remote (Myanmar)",
   primaryCTA: {
-    text: "View My Work",
+    text: "View Projects",
     href: "#projects",
   },
   secondaryCTA: {
-    text: "Get In Touch",
-    href: "#contact",
+    text: "Email Me",
+    href: "mailto:moonseng.dev@gmail.com",
+  },
+};
+
+// ============================================
+// ABOUT SECTION
+// ============================================
+
+export const about = {
+  introParagraphs: [
+    "Frontend-focused full-stack developer with 3+ years of experience building scalable, high-performance web applications using React/Next.js and Django REST Framework.",
+    "I care deeply about UI polish, accessibility, and performance, and I enjoy turning designs into clean, reusable components that are easy to maintain.",
+    "On the backend, I integrate production-ready REST APIs with PostgreSQL, implement secure authentication flows (OAuth 2.0/JWT) and role-based access control, and handle validation and error states carefully to create smooth, trustworthy user experiences. I’ve delivered end-to-end features from development to deployment, supporting production environments with tools like Nginx and PM2, and collaborating remotely with a strong ownership and communication mindset.",
+  ],
+  focusAreas: [
+    {
+      icon: Code2,
+      title: "UI Engineering",
+      points: [
+        "React / Next.js + TypeScript",
+        "Responsive, accessible components",
+        "Animation with GSAP when it adds value",
+      ],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      icon: Server,
+      title: "API Integration",
+      points: [
+        "Django REST Framework",
+        "Auth flows (OAuth/JWT) & error handling",
+        "Data fetching, caching, and state patterns",
+      ],
+      color: "from-blue-500 to-purple-500",
+    },
+    {
+      icon: Wrench,
+      title: "Delivery & Performance",
+      points: [
+        "Performance profiling and optimization",
+        "Docker (basic), Nginx, PM2",
+        "Clean architecture and maintainable code",
+      ],
+      color: "from-purple-500 to-pink-500",
+    },
+  ],
+  stackGroups: [
+    {
+      title: "Frontend",
+      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "MUI", "GSAP"],
+    },
+    {
+      title: "Backend",
+      items: ["Django REST Framework", "REST API design", "OAuth 2.0", "JWT"],
+    },
+    { title: "Data & Tools", items: ["PostgreSQL", "SQLite", "Git", "Docker"] },
+  ],
+  remote: {
+    location: "Remote (Based in Myanmar)",
+    tools: ["Zoom", "Slack", "Discord", "Async collaboration"],
+    reliability: "Fiber internet with mobile backup",
   },
 };
 
@@ -151,7 +212,7 @@ export const projects = [
     github: "https://github.com/Moon-Seng/gsap-cocktails",
     demo: "https://gsap-cocktails-moon.netlify.app/",
     gradient: "from-purple-500 to-pink-500",
-    featured: false,
+    featured: true,
   },
   {
     title: "Salespoint",
@@ -210,6 +271,40 @@ export const projects = [
     gradient: "from-yellow-500 to-orange-500",
     featured: false,
   },
+  {
+    title: "E-Commerce Product Dashboard",
+    subtitle: "Admin Dashboard for Products & Orders",
+    description:
+      "A scalable admin dashboard for managing products and orders with fast filtering, search, pagination, and responsive layouts.",
+    features: [
+      "TODO: Add 2–3 strongest features",
+      "TODO: Add impact/result (e.g., speed, usability)",
+      "TODO: Add one key technical highlight",
+    ],
+    image: "/placeholder.svg",
+    tags: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    github: null,
+    demo: null,
+    gradient: "from-sky-500 to-indigo-500",
+    featured: false,
+  },
+  {
+    title: "Booking System",
+    subtitle: "Scheduling & Reservations Platform",
+    description:
+      "A booking platform with real-time availability, validation, and concurrency-safe reservation logic backed by Django REST APIs.",
+    features: [
+      "TODO: Add 2–3 strongest features",
+      "TODO: Add impact/result (e.g., fewer booking conflicts)",
+      "TODO: Add one key technical highlight",
+    ],
+    image: "/placeholder.svg",
+    tags: ["React", "Django REST Framework", "PostgreSQL"],
+    github: null,
+    demo: null,
+    gradient: "from-fuchsia-500 to-purple-500",
+    featured: false,
+  },
 ];
 
 // ============================================
@@ -224,6 +319,8 @@ export const experience = [
     period: "2024 - Present",
     description:
       "Leading end-to-end development for web and mobile applications, pairing polished UI with resilient APIs and deployment pipelines.",
+    highlight: "Led end-to-end delivery across web + mobile.",
+    stack: ["React", "Expo", "Django", "PostgreSQL", "CI/CD"],
     achievements: [
       "Improved app performance with API caching and bundle budgets",
       "Led migration from React Native to Expo with shared design system",
@@ -237,6 +334,8 @@ export const experience = [
     period: "2023 - 2024",
     description:
       "Delivered full-stack applications spanning React/Next.js frontends and Django services with modern DevOps practices.",
+    highlight: "Shipped production features across UI, APIs, and deployment.",
+    stack: ["React", "Next.js", "Django REST", "PostgreSQL", "Nginx"],
     achievements: [
       "Built full-stack web apps and cross-platform mobile experiences",
       "Specialized in React, React Native, Django, and Celery workers",
@@ -250,6 +349,8 @@ export const experience = [
     period: "2022 - 2023",
     description:
       "Developed frontend applications for multiple e-commerce products while collaborating closely with backend teams.",
+    highlight: "Frontend delivery with reusable components and clean UX.",
+    stack: ["React", "TypeScript", "Tailwind", "MUI", "REST APIs"],
     achievements: [
       "Built 15+ features with TypeScript, React, Tailwind, and MUI",
       "Partnered with backend teams on API contracts and performance",
@@ -263,10 +364,10 @@ export const experience = [
     period: "2022 - 2023",
     description:
       "Focused on communication technologies, business information technology, and computing.",
+    stack: ["IT fundamentals", "Software development", "Web technologies"],
     achievements: [
-      "Graduated with honors",
-      "Thesis on web development",
-      "Completed multiple certifications",
+      "Completed coursework across computing and information technology",
+      "Built multiple software projects as part of the program",
     ],
   },
 ];

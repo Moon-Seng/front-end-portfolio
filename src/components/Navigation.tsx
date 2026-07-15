@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useAnalytics } from "../components/Analytics";
+import { hero } from "../portfolio-config";
 
 function NavigationLink({ item }: { item: { name: string; href: string } }) {
   const { trackClick } = useAnalytics();
@@ -82,6 +83,12 @@ export function Navigation() {
             {navItems.map((item) => (
               <NavigationLink key={item.name} item={item} />
             ))}
+            {hero.availabilityLine ? (
+              <div className="ml-2 flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-950/40 text-zinc-300 text-sm">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
+                <span>{hero.availabilityLine}</span>
+              </div>
+            ) : null}
           </div>
 
           {/* Mobile Menu Button */}

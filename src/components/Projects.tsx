@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -11,6 +11,19 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const [showAll, setShowAll] = useState(false);
+  const initialOtherCount = 8;
+
+  const { featuredProjects, otherProjects } = useMemo(() => {
+    const featured = projects.filter((p) => p.featured).slice(0, 2);
+    const featuredTitles = new Set(featured.map((p) => p.title));
+    const other = projects.filter((p) => !featuredTitles.has(p.title));
+    return { featuredProjects: featured, otherProjects: other };
+  }, []);
+
+  const visibleOtherProjects = showAll
+    ? otherProjects
+    : otherProjects.slice(0, initialOtherCount);
 
   useGSAP(
     () => {
@@ -76,197 +89,245 @@ export function Projects() {
           </p>
         </div>
 
-        {/* Featured Project */}
-        {projects
-          .filter((p) => p.featured)
-          .map((project, index) => (
-            <div key={index} className="project-card mb-12 sm:mb-16 lg:mb-20">
-              <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12 border border-zinc-700/50 backdrop-blur-sm">
-                <div className="order-2 lg:order-1 space-y-4 sm:space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-full border border-cyan-500/30">
-                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                    <span className="text-cyan-400 text-xs sm:text-sm font-medium">
-                      Featured Project
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-cyan-400 text-base sm:text-lg font-medium">
-                    {project.subtitle}
-                  </p>
-                  <p className="text-zinc-300 text-sm sm:text-base lg:text-lg leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <div>
-                    <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
-                      Key Features:
-                    </h4>
-                    <div className="grid grid-cols-1 gap-2 sm:gap-3">
-                      {project.features?.map((feature, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-2 sm:gap-3"
-                        >
-                          <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex-shrink-0"></div>
-                          <span className="text-zinc-300 text-sm sm:text-base">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="px-2 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 bg-zinc-800/80 text-zinc-300 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium border border-zinc-700/50"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    {project.github !== null && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm sm:text-base"
-                      >
-                        <Github size={18} className="sm:w-5 sm:h-5" />
-                        <span>View Code</span>
-                      </a>
-                    )}
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 text-sm sm:text-base"
-                      >
-                        <ExternalLink size={18} className="sm:w-5 sm:h-5" />
-                        <span>Live Demo</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <div className="order-1 lg:order-2 relative">
-                  <div className="relative rounded-xl sm:rounded-2xl overflow-hidden group">
-                    <LazyImage
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 sm:h-64 lg:h-80 xl:h-96 object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br  opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-
-        {/* Other Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {projects
-            .filter((p) => !p.featured)
-            .map((project, index) => (
-              <div
-                key={index}
-                className="project-card group relative bg-gradient-to-br from-zinc-900/80 to-zinc-800/40 rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500 backdrop-blur-sm"
-              >
-                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                  <LazyImage
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  />
+        <div className="projects-grid space-y-12 sm:space-y-16">
+          {/* Featured (max 2) */}
+          {featuredProjects.length ? (
+            <div className="space-y-6 sm:space-y-8">
+              {featuredProjects.map((project) => (
+                <div
+                  key={project.title}
+                  className="project-card group relative max-w-6xl mx-auto rounded-2xl overflow-hidden border border-cyan-500/20 bg-zinc-950/40 backdrop-blur-sm transition-all duration-500 hover:border-cyan-400/40"
+                >
+                  {/* glow */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br  opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
-                  ></div>
-                </div>
+                    className={`pointer-events-none absolute -inset-1 bg-gradient-to-br ${project.gradient} opacity-15 blur-2xl group-hover:opacity-25 transition-opacity duration-500`}
+                  />
 
-                <div className="p-4 sm:p-6 lg:p-8 space-y-3 sm:space-y-4">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-cyan-400 font-medium text-sm sm:text-base">
-                    {project.subtitle}
-                  </p>
-                  <p className="text-zinc-300 leading-relaxed text-sm sm:text-base">
-                    {project.description}
-                  </p>
+                  <div className="relative grid lg:grid-cols-2">
+                    <div className="relative h-64 sm:h-80 lg:h-full lg:min-h-[22rem] overflow-hidden">
+                      <LazyImage
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
+                    />
+                  </div>
 
-                  <div>
-                    <h4 className="text-white font-semibold mb-2 sm:mb-3 text-xs sm:text-sm">
-                      Features:
-                    </h4>
-                    <div className="space-y-1.5 sm:space-y-2">
-                      {project.features?.slice(0, 3).map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex-shrink-0"></div>
-                          <span className="text-zinc-400 text-xs sm:text-sm">
-                            {feature}
+                    <div className="relative p-6 sm:p-8 lg:p-10 space-y-4 lg:space-y-5">
+                      <div>
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                          {project.title}
+                        </h3>
+                        <p className="text-cyan-300 font-medium mt-1">
+                          {project.subtitle}
+                        </p>
+                      </div>
+
+                      <p className="text-zinc-300 leading-relaxed text-sm sm:text-base">
+                        {project.description}
+                      </p>
+
+                      {project.features?.length ? (
+                        <ul className="space-y-2">
+                          {project.features.slice(0, 4).map((feature) => (
+                            <li key={feature} className="flex items-start gap-2">
+                              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex-shrink-0" />
+                              <span className="text-zinc-400 text-sm">
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.slice(0, 5).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-zinc-950/60 text-zinc-200 rounded-full text-xs font-medium border border-zinc-800"
+                          >
+                            {tag}
                           </span>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        {project.demo ? (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
+                          >
+                            <ExternalLink size={18} />
+                            Live Demo
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-zinc-800 text-zinc-500 font-semibold">
+                            <ExternalLink size={18} />
+                            Live Demo —
+                          </span>
+                        )}
+
+                        {project.github ? (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-zinc-800 bg-zinc-950/40 text-zinc-200 hover:text-white hover:border-zinc-700 transition-colors font-semibold"
+                          >
+                            <Github size={18} />
+                            View Code
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-zinc-800 text-zinc-500 font-semibold">
+                            <Github size={18} />
+                            View Code —
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="px-2 sm:px-3 py-1 bg-zinc-800/60 text-zinc-300 rounded text-xs font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 3 && (
-                      <span className="px-2 sm:px-3 py-1 bg-zinc-700/60 text-zinc-400 rounded text-xs">
-                        +{project.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex gap-4 pt-2">
-                    {project.github !== null && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-cyan-400 transition-colors duration-300"
-                      >
-                        <Github size={16} className="sm:w-4 sm:h-4" />
-                        <span className="text-xs sm:text-sm font-medium">
-                          Code
-                        </span>
-                      </a>
-                    )}
-
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-purple-400 transition-colors duration-300"
-                      >
-                        <ExternalLink size={16} className="sm:w-4 sm:h-4" />
-                        <span className="text-xs sm:text-sm font-medium">
-                          Demo
-                        </span>
-                      </a>
-                    )}
-                  </div>
                 </div>
+              ))}
+            </div>
+          ) : null}
+
+          {/* More projects (6–8) */}
+          {otherProjects.length ? (
+            <div className="space-y-8">
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                  More Projects
+                </h3>
+                <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
               </div>
-            ))}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                {visibleOtherProjects.map((project) => (
+                  <div
+                    key={project.title}
+                    className="project-card group relative bg-gradient-to-br from-zinc-900/80 to-zinc-800/40 rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500 backdrop-blur-sm"
+                  >
+                    <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                      <LazyImage
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
+                      />
+                    </div>
+
+                    <div className="p-4 sm:p-6 lg:p-8 space-y-3 sm:space-y-4">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white">
+                        {project.title}
+                      </h3>
+                      <p className="text-cyan-400 font-medium text-sm sm:text-base">
+                        {project.subtitle}
+                      </p>
+                      <p className="text-zinc-300 leading-relaxed text-sm sm:text-base">
+                        {project.description}
+                      </p>
+
+                      {project.features?.length ? (
+                        <div>
+                          <h4 className="text-white font-semibold mb-2 sm:mb-3 text-xs sm:text-sm">
+                            Features:
+                          </h4>
+                          <div className="space-y-1.5 sm:space-y-2">
+                            {project.features?.slice(0, 2).map((feature) => (
+                              <div key={feature} className="flex items-center gap-2">
+                                <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex-shrink-0" />
+                                <span className="text-zinc-400 text-xs sm:text-sm">
+                                  {feature}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                        {project.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 sm:px-3 py-1 bg-zinc-800/60 text-zinc-300 rounded text-xs font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {project.tags.length > 3 && (
+                          <span className="px-2 sm:px-3 py-1 bg-zinc-700/60 text-zinc-400 rounded text-xs">
+                            +{project.tags.length - 3}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex gap-4 pt-2">
+                        {project.github ? (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-cyan-400 transition-colors duration-300"
+                          >
+                            <Github size={16} className="sm:w-4 sm:h-4" />
+                            <span className="text-xs sm:text-sm font-medium">
+                              Code
+                            </span>
+                          </a>
+                        ) : (
+                          <span className="flex items-center gap-1.5 sm:gap-2 text-zinc-600">
+                            <Github size={16} className="sm:w-4 sm:h-4" />
+                            <span className="text-xs sm:text-sm font-medium">
+                              Code —
+                            </span>
+                          </span>
+                        )}
+
+                        {project.demo ? (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 hover:text-purple-400 transition-colors duration-300"
+                          >
+                            <ExternalLink size={16} className="sm:w-4 sm:h-4" />
+                            <span className="text-xs sm:text-sm font-medium">
+                              Demo
+                            </span>
+                          </a>
+                        ) : (
+                          <span className="flex items-center gap-1.5 sm:gap-2 text-zinc-600">
+                            <ExternalLink size={16} className="sm:w-4 sm:h-4" />
+                            <span className="text-xs sm:text-sm font-medium">
+                              Demo —
+                            </span>
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {otherProjects.length > initialOtherCount ? (
+                <div className="pt-6 flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAll((v) => !v)}
+                    className="px-6 py-3 rounded-xl border border-zinc-800 bg-zinc-950/40 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
+                  >
+                    {showAll ? "Show less" : "View more"}
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
